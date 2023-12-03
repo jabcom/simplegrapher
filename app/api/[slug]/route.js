@@ -4,13 +4,6 @@ export const dynamic = 'force-dynamic' // defaults to force-static
 export const fetchCache = 'no-cache' // defaults to default
 
 export async function GET(request, { params }) {
-  const dummyData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      { label: 'First dataset', data: [33, 53, 85, 41, 44, 65, 25] },
-      { label: 'Second dataset', data: [33, 25, 35, 51, 54, 76, 45] }
-    ]
-  }
   const slug = params.slug
 
   //Get Data
@@ -44,7 +37,7 @@ export async function GET(request, { params }) {
   try {
     const data = JSON.parse(dataString)
     console.log(data)
-    const sensor = data.sensor
+    const sensor = data.sensor.replace(/,/g, '') // Remove commas from sensor name - just in case
     const reading = JSON.stringify(data.reading)
     const timeString = new Date().toISOString()
     // Save to a csv file
