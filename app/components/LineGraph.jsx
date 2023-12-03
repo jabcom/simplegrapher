@@ -11,6 +11,15 @@ import {
 } from 'chart.js';
 import { Line } from "react-chartjs-2";
 
+const colours = ['#072448', '#54d2d2', '#ffcb00', '#f8aa4b', '#ff6150', '#1f306e', '#553772', '#8f3b76', '#c7417b', '#f5487f']
+
+function getColour(index) {
+  if (index < colours.length) {
+    return colours[index]
+  }
+  return colours[index % colours.length]
+}
+
 const LineGraph = () => {
   ChartJS.register(
     CategoryScale,
@@ -55,7 +64,7 @@ const LineGraph = () => {
             label: datasetName,
             data: [],
             fill: false,
-            borderColor: 'rgb('+(75*(Object.keys(datasetObj).length+1))+', 192, 192)',
+            borderColor: colours[Object.keys(datasetObj).length],
             tension: 0.1
           }
         // Add data to dataset
